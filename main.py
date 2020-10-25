@@ -114,6 +114,7 @@ def handle_image_message(event):
         original_content_url=f"https://date-the-image.herokuapp.com/{main_image_path}",
         preview_image_url=f"https://date-the-image.herokuapp.com/{preview_image_path}",
     )
+    line_bot_api.reply_message(event.reply_token, image_message)
 
 
 if __name__ == "__main__":
