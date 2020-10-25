@@ -40,7 +40,7 @@ def save_image(message_id: str, save_path: str) -> None:
 def change_kaonasi(src_image_path,main_image_path,preview_image_path):
     face_count=0
     # カスケードファイルを指定して、分類機を作成
-    cascade_file = "haarcascade_frontalface_alt.xml"
+    cascade_file = "haarcascade_frontalface_default.xml"
     face_cascade = cv2.CascadeClassifier(cascade_file)
     img = cv2.imread(str(src_image_path))
 
