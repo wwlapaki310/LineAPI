@@ -6,6 +6,7 @@ from typing import List
 import cv2
 import numpy as np
 import random
+from PIL import Image, ImageDraw, ImageFilter
 
 def change_kaonasi(src_image_path):
     face_count=0
@@ -13,6 +14,8 @@ def change_kaonasi(src_image_path):
     cascade_file = "haarcascade_frontalface_default.xml"
     face_cascade = cv2.CascadeClassifier(cascade_file)
     img = cv2.imread(str(src_image_path))
+    back_im=Image.open(str(src_image_path))
+    #background = Image.new("RGB", image.size, (255, 255, 255))
 
     # グレースケール変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -23,17 +26,15 @@ def change_kaonasi(src_image_path):
         #cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         face_count+=1
         img_kaonasi_url="./img/"+str(random.randrange(10))+".png"
-        img_kaonasi = cv2.imread(img_kaonasi_url)
-    
-        # 顔に合ったサイズに隠す用画像をリサイズする
-        img_kaonasi2 =cv2.resize(img_kaonasi ,(w, h))
-        #img_kaonasi2 = img_kaonasi.resize((w, h))
-        img[y:y+h,x:x+w] = img_kaonasi2
-        #img[x:x+w, y:y+h] = img_kaonasi2
-    cv2.imwrite("a.jpg",img)
-    cv2.imwrite("b.jpg",img)
+        im2 = Image.open(img_kaonasi_url)
+        im2=im2.resize((w, h))
+        back_im.paste(im2, (x, y),mask=im2)
+    back_im.save("a.jpg", quality=95)
+    #cv2.imwrite("a.jpg",img)
+    #cv2.imwrite("b.jpg",img)
     return 1
 
 src_image_path="president.jpg"
 a=change_kaonasi(src_image_path)
 print(a)
+
