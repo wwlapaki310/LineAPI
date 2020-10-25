@@ -42,7 +42,7 @@ def change_kaonasi(src_image_path,main_image_path,preview_image_path):
     # カスケードファイルを指定して、分類機を作成
     cascade_file = "haarcascade_frontalface_alt.xml"
     cascade = cv2.CascadeClassifier(cascade_file)
-    img = cv2.imread(src_image_path)
+    img = cv2.imread(str(src_image_path))
 
     # グレースケール変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -53,7 +53,7 @@ def change_kaonasi(src_image_path,main_image_path,preview_image_path):
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         face_count+=1
         img_kaonasi_url="./img/"+str(random.randrange(10))+".jpg"
-        img_kaonasi = cv2.read(img_kaonasi_url)
+        img_kaonasi = cv2.imread(img_kaonasi_url)
     
         # 顔に合ったサイズに隠す用画像をリサイズする
         img_kaonasi2 = img_kaonasi.resize((w, h))
