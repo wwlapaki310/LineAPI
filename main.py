@@ -57,7 +57,7 @@ def change_kaonasi(src_image_path,main_image_path,preview_image_path):
     
         # 顔に合ったサイズに隠す用画像をリサイズする
         img_kaonasi2 = img_kaonasi.resize((w, h))
-        img[0:height, 0:width] = img_kaonasi2
+        img[0:h, 0:w] = img_kaonasi2
     cv2.imwrite(main_image_path,img)
     cv2.imwrite(preview_image_path,img)
 
